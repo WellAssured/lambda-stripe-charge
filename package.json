@@ -1,0 +1,23 @@
+{
+  "name": "lambda-mailing-list",
+  "version": "1.0.0",
+  "description": "Lambda function to interact with Mailchimp API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WellAssured/lambda-mailing-list.git"
+  },
+  "author": "Jack White",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WellAssured/lambda-mailing-list/issues"
+  },
+  "homepage": "https://github.com/WellAssured/lambda-mailing-list#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "npm": "^5.7.1"
+  }
+}
