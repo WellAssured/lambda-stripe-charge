@@ -10,7 +10,7 @@ exports.handler = (event, context, callback) => {
   // a status of pending indicates that we expect Mailchimp to send a verification email to the user.
   axios.post(mailchimpURL, {
     email_address: event.email,
-    status: "pending",
+    status: "subscribed",
     merge_fields: {
       FNAME: event.firstName,
       LNAME: event.lastName,
