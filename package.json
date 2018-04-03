@@ -4,7 +4,7 @@
   "description": "Lambda function to interact with Mailchimp API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "zip": "zip -r ../lambda-mailing-list.zip index.js package.json node_modules"
   },
   "repository": {
     "type": "git",
