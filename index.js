@@ -1,50 +1,28 @@
 'use strict';
 
-const axios = require('axios');
+const stripe = require('stripe')(process.env.stripeKey);
 
 exports.handler = (event, context, callback) => {
-  const mailchimpKEY = process.env.api_key;
-  const mailchimpURL = process.env.api_url;
   const json = JSON.parse(event.body);
-  // Post new subscriber to Mailchimp. (List # and API Key are stored in Lambda Environment Variables)
-  // a status of pending indicates that we expect Mailchimp to send a verification email to the user.
-  axios.post(mailchimpURL, {
-    email_address: json.email,
-    status: "subscribed",
-    merge_fields: {
-      FNAME: json.firstName,
-      LNAME: json.lastName,
-    }
-  },{
-    auth: {
-      username: 'username',
-      password: mailchimpKEY,
-    }
-  }).then(response =>
-    callback(null, {
-      "isBase64Encoded": false,
-      "statusCode": response.status,
-      "headers": { "Access-Control-Allow-Origin": '*'},
-      "body": JSON.stringify({'response': response.status, 'responseText': response.statusText})
-    })
-  ).catch(error => {
-    if (error.response) {
+
+  stripe.customers.create(json.customer)
+    .then(customer => stripe.customers.createSource(customer.id, json.token))
+    .then(source => stripe.charges.create({ customer: source.customer, ...json.charge }))
+    .then(charge => {
+      console.log(JSON.stringify(charge));
       callback(null, {
         "isBase64Encoded": false,
-        "statusCode": error.response.status,
+        "statusCode": 200,
         "headers": { "Access-Control-Allow-Origin": '*'},
-        "body": JSON.stringify({
-          'errorResponseStatus': error.response.status,
-          'errorResponseData': error.response.data
-        })
+        "body": JSON.stringify(charge)  // {'response': response.status, 'responseText': response.statusText})
       });
-    } else {
-      callback({
+    }).catch(error => {
+      console.log(JSON.stringify(error));
+      callback(null, {
         "isBase64Encoded": false,
-        "statusCode": 500,
+        "statusCode": 400,
         "headers": { "Access-Control-Allow-Origin": '*'},
-        "body": JSON.stringify({'response': error})
-      })
-    }
-  });
+        "body": JSON.stringify(error)
+      });
+    });
 };

@@ -1,23 +1,23 @@
 {
-  "name": "lambda-mailing-list",
+  "name": "lambda-stripe-charge",
   "version": "1.0.0",
-  "description": "Lambda function to interact with Mailchimp API",
+  "description": "Lambda function to interact with Stripe API",
   "main": "index.js",
   "scripts": {
-    "zip": "zip -r ../lambda-mailing-list.zip index.js package.json node_modules"
+    "zip": "zip -r ../lambda-stripe-charge.zip index.js package.json node_modules"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WellAssured/lambda-mailing-list.git"
+    "url": "git+https://github.com/WellAssured/lambda-stripe-charge.git"
   },
   "author": "Jack White",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WellAssured/lambda-mailing-list/issues"
+    "url": "https://github.com/WellAssured/lambda-stripe-charge/issues"
   },
-  "homepage": "https://github.com/WellAssured/lambda-mailing-list#readme",
+  "homepage": "https://github.com/WellAssured/lambda-stripe-charge#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "npm": "^5.7.1"
+    "npm": "^5.7.1",
+    "stripe": "^6.12.1"
   }
 }

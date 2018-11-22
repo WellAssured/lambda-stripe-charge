@@ -1,2 +1,2 @@
-# lambda-mailing-list
-Lambda function to interact with Mailchimp API
+# lambda-stripe-charge
+Lambda function to interact with Stripe API
